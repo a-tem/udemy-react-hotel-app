@@ -18,22 +18,28 @@ import Settings from "./pages/Settings";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
+import AppLayout from "./ui/AppLayout";
 
 function App() {
   const router = createBrowserRouter([
     {
+      element: <AppLayout />,
       children: [
-        { path: "/", element: <Navigate to="/dashboard" replace /> },
+        {
+          path: "/",
+          element: <Navigate to="/dashboard" replace />,
+          index: true,
+        },
         { path: "/dashboard", element: <Dashboard /> },
         { path: "/bookings", element: <Bookings /> },
         { path: "/cabins", element: <Cabins /> },
         { path: "/users", element: <Users /> },
         { path: "/settings", element: <Settings /> },
         { path: "/account", element: <Account /> },
-        { path: "/login", element: <Login /> },
-        { path: "*", element: <PageNotFound /> },
       ],
     },
+    { path: "/login", element: <Login /> },
+    { path: "*", element: <PageNotFound /> },
   ]);
 
   return (
