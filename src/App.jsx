@@ -1,44 +1,72 @@
 import React from "react";
-import styled from "styled-components";
-import GlobalStyles from "./styles/GlobalStyles";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
-import Heading from "./ui/Heading";
-import Row from "./ui/Row";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
-// NOTE: To have the code highlighting and autocompletion as "normal CSS", install the vscode-styled-components extension
-const StyledApp = styled.div`
-  /* background-color: orangered; */
-  padding: 20px;
-`;
+import GlobalStyles from "./styles/GlobalStyles";
+
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
+import AppLayout from "./ui/AppLayout";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      element: <AppLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Navigate to="/dashboard" replace />,
+          index: true,
+        },
+        { path: "/dashboard", element: <Dashboard /> },
+        { path: "/bookings", element: <Bookings /> },
+        { path: "/cabins", element: <Cabins /> },
+        { path: "/users", element: <Users /> },
+        { path: "/settings", element: <Settings /> },
+        { path: "/account", element: <Account /> },
+      ],
+    },
+    { path: "/login", element: <Login /> },
+    { path: "*", element: <PageNotFound /> },
+  ]);
+
   return (
     <>
-      {/* NOTE: GlobalStyles component shoud not have any children, that's why use fragment around it and sibling StyledApp component */}
       <GlobalStyles />
-      <StyledApp>
-        <Row>
-          <Row type="horizontal">
-            <Heading as="h1">App</Heading>
-            <div>
-              <Heading as="h2">Authorization</Heading>
-              <Button>Check In</Button>
-              <Button variation="secondary" size="small">
-                Check Out
-              </Button>
-            </div>
-          </Row>
-          <Row>
-            <Heading as="h3">Form</Heading>
-            <form>
-              <Input placeholder="Input One" />
-              <Input placeholder="Input Two" type="number" />
-            </form>
-          </Row>
-        </Row>
-      </StyledApp>
+      <RouterProvider router={router} />
     </>
   );
+
+  // NOTE: declarative way of defining routes
+  /*
+  return (
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/bookings" element={<Bookings />} />
+          <Route path="/cabins" element={<Cabins />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+  */
 }
+
 export default App;
