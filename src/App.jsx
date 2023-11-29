@@ -24,7 +24,9 @@ function App() {
             <div>
               <Heading as="h2">Authorization</Heading>
               <Button>Check In</Button>
-              <Button>Check Out</Button>
+              <Button variation="secondary" size="small">
+                Check Out
+              </Button>
             </div>
           </Row>
           <Row>
