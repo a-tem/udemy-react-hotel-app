@@ -22,7 +22,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      // NOTE: Amount of time after which the data in cache became "stale" and auto re-fetch will be done.
+      // staleTime: 60 * 1000,
+
+      // NOTE: 0 means that data immediately became "stale".
+      staleTime: 0,
     },
   },
 });
