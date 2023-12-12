@@ -54,7 +54,7 @@ function CabinRow({ cabin }) {
     onSuccess: () => {
       // NOTE: invalidateQuery will invalidate cache of a specific query(es) (specified by queryKey param)
       queryClient.invalidateQueries({
-        queryKey: ['cabin']
+        queryKey: ['cabins']
       })
     },
     onError: (err) => {
